@@ -3,10 +3,14 @@ import { Text, View, StyleSheet, TouchableHighlight } from "react-native";
 
 import Upgrade from "../Components/Upgrade";
 import ResetBtn from "../Components/ResetBtn";
+import Banks from "../Components/Banks";
 
 const ClickerScreen = () => {
   return (
     <View style={styles.screen}>
+      <View style={styles.banksContainer}>
+        <Banks />
+      </View>
       <TouchableHighlight
         style={styles.clickZoneContainer}
         onPress={() => console.log("$++")}
@@ -28,9 +32,10 @@ const ClickerScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  clickZoneContainer: { flex: 2, width: "100%" },
+  banksContainer: { flex: 1, width: "100%" },
+  clickZoneContainer: { flex: 10, width: "100%" },
   clickZone: { flex: 1, backgroundColor: "gray", width: "100%" },
-  upgradeZone: { flex: 3, flexDirection: "row", width: "100%" },
+  upgradeZone: { flex: 5, flexDirection: "row", width: "100%" },
   upgradeCol: {
     width: "50%",
     justifyContent: "space-around",
