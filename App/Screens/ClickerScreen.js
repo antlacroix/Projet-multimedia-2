@@ -1,23 +1,42 @@
-import * as React from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableHighlight,
-  Animated,
-} from "react-native";
+import React, { useState, useContext, useCallback } from "react";
+import { View, StyleSheet, TouchableHighlight } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 
-import Upgrade from "../Components/Upgrade";
 import ResetBtn from "../Components/ResetBtn";
 import Banks from "../Components/Banks";
-import InputFeedback from "../Components/InputFeedback";
-
-let InputCoord = [{ x: 10, y: 10 }];
-const clicksFeedbackComponents = InputCoord.map((input) => (
-  <InputFeedback x={input.x} y={input} />
-));
+import InputFeedbackContainer from "../Components/InputFeedbackContainer";
+import { DataContext } from "../Context/DataContext";
+import UpgradeContainer from "../Components/UpgradeContainer";
+import DataManager from "../Context/DataManager";
 
 const ClickerScreen = () => {
+
+  const load = () => {
+    //updatePlayer(DataManager.player());
+    console.log("CliskScreen");
+  } 
+  useFocusEffect(useCallback(load))
+
+  const [inputCoord, setInputCoord] = useState([]);
+  const { player, updatePlayer } = useContext(DataContext);
+  const ClickAction = (evt) => {
+    while (inputCoord.length > 0) {
+      inputCoord.shift();
+      setInputCoord([...inputCoord]);
+    }
+    setInputCoord([
+      ...inputCoord,
+      {
+        x: evt.nativeEvent.locationX,
+        y: evt.nativeEvent.locationY,
+      },
+    ]);
+    const tempPlayer = {...player};
+    tempPlayer.montant++;
+    tempPlayer.nbrClick++;
+    updatePlayer(tempPlayer);
+  };
+
   return (
     <View style={styles.screen}>
       <View style={styles.banksContainer}>
@@ -28,18 +47,12 @@ const ClickerScreen = () => {
         onPress={(evt) => ClickAction(evt)}
       >
         <View style={styles.clickZone}>
-          <InputFeedback x={100} y={100} />
+          <InputFeedbackContainer input={inputCoord} />
         </View>
       </TouchableHighlight>
       <View style={styles.upgradeZone}>
-        <View style={styles.upgradeCol}>
-          <Upgrade />
-          <Upgrade />
-        </View>
-        <View style={styles.upgradeCol}>
-          <Upgrade />
+          <UpgradeContainer upgradeType={"click"} />
           <ResetBtn />
-        </View>
       </View>
     </View>
   );
@@ -64,19 +77,5 @@ const styles = StyleSheet.create({
   },
   screen: { flex: 1, justifyContent: "center", alignItems: "center" },
 });
-
-function ClickAction(evt) {
-  InputCoord.push({
-    x: evt.nativeEvent.locationX,
-    y: evt.nativeEvent.locationY,
-  });
-  for (let i = 0; i < InputCoord.length; i++) {
-    const element = InputCoord[i];
-    console.log("(" + element.x + ", " + element.y + ")");
-  }
-  if (InputCoord.length > 5) {
-    InputCoord.shift();
-  }
-}
 
 export default ClickerScreen;

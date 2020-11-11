@@ -1,21 +1,28 @@
-import * as React from "react";
-import {
-  Text,
-  View,
-  Image,
-  StyleSheet,
-  TouchableNativeFeedback,
-  ScrollView,
-} from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
+import React, {useContext, useCallback, useEffect} from "react";
+import { Text, View, StyleSheet, ScrollView } from "react-native";
+
+import { DataContext } from "../Context/DataContext";
 
 const Statistic = () => {
+  const { player } = useContext(DataContext);
+
+  const load = () => {
+    console.log("stat")
+  }
+
+  useFocusEffect(useCallback(load))
+
+
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
         <Text>STATISTIQUE</Text>
       </View>
       <ScrollView style={styles.statContainer}>
-        <Text></Text>
+        <Text>nbrClick: {player.nbrClick}</Text>
+        <Text>montant: {player.montant}</Text>
+        <Text>Montant Legacy: {player.montantLegacy}</Text>
       </ScrollView>
     </View>
   );

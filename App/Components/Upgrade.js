@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import {
   Text,
   View,
@@ -7,18 +7,35 @@ import {
   TouchableHighlight,
 } from "react-native";
 
-const Upgrade = () => {
+import { DataContext } from "../Context/DataContext";
+
+const Upgrade = (props) => {
+  const { upgrades, updateUpgrade } = useContext(DataContext);
+  const upgrade = upgrades.find(u => u.id === props.id);
+
+  const onPressHandle = () => {
+    console.log(upgrade.id + ": lvl-up");
+    if(true){
+      const tempUpgrade = {...upgrade};
+      tempUpgrade.lvl++;
+      updateUpgrade(tempUpgrade);
+    }
+  }
+
   return (
     <TouchableHighlight
       style={styles.upgradeBtn}
-      onPress={() => console.log("lvl-up")}
+      onPress={() => onPressHandle()}
     >
       <View style={styles.upgradeContainer}>
         <Image
           source={require("../Assets/arr-up.png")}
           style={styles.upgradeImage}
         />
-        <View style={styles.upgradeDescription}></View>
+        <View style={styles.upgradeDescription}>
+          <Text>Upgrade ID: {upgrade.id}</Text>
+          <Text>Level: {upgrade.lvl}</Text>
+        </View>
       </View>
     </TouchableHighlight>
   );

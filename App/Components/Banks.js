@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import {
   Text,
   View,
@@ -8,13 +8,13 @@ import {
 } from "react-native";
 
 import Bank from "../Components/Bank";
-import LegacyBank from "../Components/LegacyBank";
+import BankLegacy from "./BankLegacy";
 
 const Banks = () => {
   return (
     <View style={styles.container}>
       <Bank />
-      <LegacyBank />
+      <BankLegacy />
     </View>
   );
 };

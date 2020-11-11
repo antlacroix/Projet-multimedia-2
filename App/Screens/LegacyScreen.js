@@ -1,14 +1,19 @@
-import * as React from "react";
+import React, {useCallback} from "react";
 import { Text, View, StyleSheet } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 
-import Upgrade from "../Components/Upgrade";
 import Statistic from "../Components/Statistic";
 import ResetBtn from "../Components/ResetBtn";
-import Bank from "../Components/Bank";
-import LegacyBank from "../Components/LegacyBank";
 import Banks from "../Components/Banks";
+import UpgradeContainer from "../Components/UpgradeContainer";
 
 const LegacyScreen = () => {
+
+  const load = () => {
+    console.log("LegacyScreen");
+  } 
+  useFocusEffect(useCallback(load))
+
   return (
     <View style={styles.screen}>
       <View style={styles.banksContainer}>
@@ -18,8 +23,7 @@ const LegacyScreen = () => {
         <Statistic />
       </View>
       <View style={styles.upgradeContainer}>
-        <Upgrade />
-        <Upgrade />
+          <UpgradeContainer upgradeType={"legacy"}/>
         <ResetBtn />
       </View>
     </View>

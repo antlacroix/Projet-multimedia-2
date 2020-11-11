@@ -7,10 +7,14 @@ import {
   TouchableHighlight,
 } from "react-native";
 
+import { DataContext } from "../Context/DataContext";
+
 const LegacyBank = () => {
+  const { player } = React.useContext(DataContext);
+
   return (
     <View style={styles.container}>
-      <Text>Legacy:..................XX,XX$</Text>
+      <Text>Legacy:................{player.montantLegacy}$</Text>
     </View>
   );
 };
