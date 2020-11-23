@@ -7,13 +7,6 @@ import { DataContext } from "../Context/DataContext";
 const Statistic = () => {
   const { player } = useContext(DataContext);
 
-  const load = () => {
-    console.log("stat")
-  }
-
-  useFocusEffect(useCallback(load))
-
-
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -21,8 +14,27 @@ const Statistic = () => {
       </View>
       <ScrollView style={styles.statContainer}>
         <Text>nbrClick: {player.nbrClick}</Text>
-        <Text>montant: {player.montant}</Text>
-        <Text>Montant Legacy: {player.montantLegacy}</Text>
+        <Text>nbrClickLifeTime: {player.nbrClickLifeTime}</Text>
+        <Text> </Text>
+        <Text>montantTotal: {player.montantTotal}</Text>
+        <Text>montantLifeTime: {player.montantLifeTime}</Text>
+        <Text> </Text>
+        <Text>montantSpent: {player.montantSpent}</Text>
+        <Text>montantSpentLifeTime: {player.montantSpentLifeTime}</Text>
+        <Text> </Text>
+        <Text>nbrUpgrade: {player.nbrUpgrade}</Text>
+        <Text>nbrUpgradeLifeTime: {player.nbrUpgradeLifeTime}</Text>
+        <Text> </Text>
+        <Text>nbrReset: {player.nbrReset}</Text>
+        <Text> </Text>
+        <Text>montantLegacyLifeTime: {player.montantLegacyLifeTime}</Text>
+        <Text> </Text>
+        <Text>montantLegacySpent: {player.montantLegacySpent}</Text>
+        <Text>montantLegacySpentLifeTime: {player.montantLegacySpentLifeTime}</Text>
+        <Text> </Text>
+        <Text> </Text>
+        <Text> </Text>
+        <Text> </Text>
       </ScrollView>
     </View>
   );

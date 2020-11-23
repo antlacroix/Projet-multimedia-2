@@ -14,7 +14,7 @@ const LegacyBank = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Legacy:................{player.montantLegacy}$</Text>
+      <Text>Legacy:................{player.montantLegacy.toFixed(2)}$</Text>
     </View>
   );
 };

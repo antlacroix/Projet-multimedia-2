@@ -4,15 +4,11 @@ import { useFocusEffect } from "@react-navigation/native";
 
 import Statistic from "../Components/Statistic";
 import ResetBtn from "../Components/ResetBtn";
+import NewGameBtn from "../Components/NewGameBtn";
 import Banks from "../Components/Banks";
 import UpgradeContainer from "../Components/UpgradeContainer";
 
 const LegacyScreen = () => {
-
-  const load = () => {
-    console.log("LegacyScreen");
-  } 
-  useFocusEffect(useCallback(load))
 
   return (
     <View style={styles.screen}>
@@ -25,6 +21,7 @@ const LegacyScreen = () => {
       <View style={styles.upgradeContainer}>
           <UpgradeContainer upgradeType={"legacy"}/>
         <ResetBtn />
+        <NewGameBtn />
       </View>
     </View>
   );

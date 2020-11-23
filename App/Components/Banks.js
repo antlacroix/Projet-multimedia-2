@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Text,
   View,
@@ -9,8 +9,13 @@ import {
 
 import Bank from "../Components/Bank";
 import BankLegacy from "./BankLegacy";
+import { DataContext } from "../Context/DataContext";
 
 const Banks = () => {
+  
+  const { player, updatePlayer } = useContext(DataContext);
+  const { upgrades, updateUpgrade } = useContext(DataContext);
+
   return (
     <View style={styles.container}>
       <Bank />

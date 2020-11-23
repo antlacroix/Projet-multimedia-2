@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import inputFeedback from "./InputFeedback";
 import {
   Text,
@@ -9,6 +9,8 @@ import {
 } from "react-native";
 
 import InputFeedback from "../Components/InputFeedback";
+import { DataContext } from "../Context/DataContext";
+
 const intKey = 0;
 
 const key = () =>{
@@ -16,11 +18,14 @@ const key = () =>{
   return intKey;
 } 
 const inputFeedbackContainer = (props) => {
-  return props.input.map((inputFeedback) => (
+
+  const { inputCoord } = useContext(DataContext);
+
+  return inputCoord.map((inputFeedback) => (
     <InputFeedback
-      key={key}
-      x={inputFeedback.x}
-      y={inputFeedback.y}
+      key={inputFeedback.id}
+      x={inputFeedback.xVal}
+      y={inputFeedback.yVal}
     />
   ));
 };

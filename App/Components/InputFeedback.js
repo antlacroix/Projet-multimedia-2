@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import {
   Text,
   View,
@@ -9,33 +9,48 @@ import {
   Platform,
 } from "react-native";
 
-const InputFeedback = (props) => {
-  let position = null;
 
+import { DataContext } from "../Context/DataContext";
+
+const InputFeedback = (props) => {
+
+  useEffect(()=>{
+    animation.start();
+    return function cleanup() {
+    }
+  },[]);
+
+  const { inputCoord, removeFinishInputCoord } = useContext(DataContext);
+
+  let position = null;
+  
   if (Platform.OS === "web") {
-    position = new Animated.ValueXY({ x: 10, y: 10 });
+    position = new Animated.ValueXY({ 
+      x: 250,
+      y: 250
+     });
   } else {
     position = new Animated.ValueXY({ x: props.x, y: props.y });
   }
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
-  Animated.sequence([
+  const animation = Animated.sequence([
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 500,
+      duration: 250,
       useNativeDriver: true,
     }),
     Animated.timing(position, {
       toValue: { x: 50, y: -50 },
-      duration: 500,
+      duration: 250,
       useNativeDriver: true,
     }),
     Animated.timing(fadeAnim, {
       toValue: 0,
-      duration: 500,
+      duration: 250,
       useNativeDriver: true,
     }),
-  ]).start();
+  ]);
 
   return (
     <Animated.View

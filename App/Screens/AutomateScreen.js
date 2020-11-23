@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import { Text, View, StyleSheet } from "react-native";
 
 import ResetBtn from "../Components/ResetBtn";
@@ -9,13 +9,8 @@ import { DataContext } from "../Context/DataContext";
 
 const AutomateScreen = () => {
 
-  const {player} = useContext(DataContext)
-
-  const load = () => {
-    console.log("autoScreen");
-  } 
-  useFocusEffect(useCallback(load))
-
+  const { player, updatePlayer, canUpdate, setCanUpdate } = useContext(DataContext);
+  const { upgrades, updateUpgrade } = useContext(DataContext);
 
   return (
     <View style={styles.screen}>

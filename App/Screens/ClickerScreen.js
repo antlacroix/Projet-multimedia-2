@@ -1,5 +1,5 @@
-import React, { useState, useContext, useCallback } from "react";
-import { View, StyleSheet, TouchableHighlight } from "react-native";
+import React, { useState, useContext, useCallback, useRef } from "react";
+import { View, StyleSheet, TouchableHighlight, PanResponder } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 
 import ResetBtn from "../Components/ResetBtn";
@@ -8,34 +8,29 @@ import InputFeedbackContainer from "../Components/InputFeedbackContainer";
 import { DataContext } from "../Context/DataContext";
 import UpgradeContainer from "../Components/UpgradeContainer";
 import DataManager from "../Context/DataManager";
+import Animated from "react-native-reanimated";
 
 const ClickerScreen = () => {
 
-  const load = () => {
-    //updatePlayer(DataManager.player());
-    console.log("CliskScreen");
-  } 
-  useFocusEffect(useCallback(load))
-
   const [inputCoord, setInputCoord] = useState([]);
-  const { player, updatePlayer } = useContext(DataContext);
+  const { clickAdd } = useContext(DataContext);
+
   const ClickAction = (evt) => {
-    while (inputCoord.length > 0) {
-      inputCoord.shift();
-      setInputCoord([...inputCoord]);
-    }
-    setInputCoord([
-      ...inputCoord,
-      {
-        x: evt.nativeEvent.locationX,
-        y: evt.nativeEvent.locationY,
-      },
-    ]);
-    const tempPlayer = {...player};
-    tempPlayer.montant++;
-    tempPlayer.nbrClick++;
-    updatePlayer(tempPlayer);
+    clickAdd(evt.nativeEvent.locationX, evt.nativeEvent.locationY);
   };
+
+  // const position = new Animated.ValueXY({x: 0, y: 0});
+  // const pan = useState(new Animated.ValueXY({x: 0, y: 0}));
+
+  // const panResponder = useState(
+  //   PanResponder.create({
+  //     onStartShouldSetPanResponder: () => true,
+  //     onPanResponderGrant: () => {
+  //       console.log("touch");
+  //     }
+
+  //   })
+  // )[0];
 
   return (
     <View style={styles.screen}>
@@ -47,7 +42,7 @@ const ClickerScreen = () => {
         onPress={(evt) => ClickAction(evt)}
       >
         <View style={styles.clickZone}>
-          <InputFeedbackContainer input={inputCoord} />
+          <InputFeedbackContainer />
         </View>
       </TouchableHighlight>
       <View style={styles.upgradeZone}>

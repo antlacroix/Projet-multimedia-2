@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useContext} from "react";
 import {
   Text,
   View,
@@ -10,21 +10,15 @@ import {
   Alert,
 } from "react-native";
 
+
+import { DataContext } from "../Context/DataContext";
+
 const ResetBtn = () => {
+
+  const { resetGame } = useContext(DataContext);
+
   return (
-    <TouchableHighlight
-      onPress={() =>
-        Alert.alert(
-          "RESET!",
-          "voulez-vous reset l'instance?",
-          [
-            { text: "Oui", onPress: () => console.log("yes") },
-            { text: "Non", onPress: () => console.log("no") },
-          ],
-          { cancelable: true }
-        )
-      }
-    >
+    <TouchableHighlight onPress={() => resetGame() }>
       <View style={styles.btn}>
         <Text>RESET</Text>
       </View>
