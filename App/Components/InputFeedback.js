@@ -25,10 +25,7 @@ const InputFeedback = (props) => {
   let position = null;
   
   if (Platform.OS === "web") {
-    position = new Animated.ValueXY({ 
-      x: 250,
-      y: 250
-     });
+    position = new Animated.ValueXY({ x: props.x, y: props.y });
   } else {
     position = new Animated.ValueXY({ x: props.x, y: props.y });
   }

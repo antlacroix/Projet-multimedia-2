@@ -21,13 +21,15 @@ const NewGameBtn = () => {
   }
 
     return (
+      <View style={styles.btnContainer}>
         <TouchableHighlight
           onPress={() => NewGameHandler()}
-        >
+          >
           <View style={styles.btn}>
             <Text>New Game</Text>
           </View>
         </TouchableHighlight>
+      </View>
       );  
 };
 
@@ -42,5 +44,7 @@ const styles = StyleSheet.create({
       backgroundColor: "lightblue",
       borderRadius: 25,
     },
+    btnContainer:{alignItems:'center', marginBottom: 20}
+
   });
 export default NewGameBtn;

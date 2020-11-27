@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
   statContainer: { flex: 7.5, padding: 10 },
   upgradeContainer: {
     flex: 7.5,
-    justifyContent: "space-around",
-    alignItems: "center",
+    flexDirection: 'column',
+    width: "100%" 
   },
 });
 

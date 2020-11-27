@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { DataContext } from "./../Context/DataContext";
 import Upgrade from "./Upgrade";
 
@@ -20,10 +20,11 @@ const UpgradeContainer = (props) => {
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       {localUpgrades().map((u) => {
         return (
           <Upgrade
+            style={styles.contant}
             key={u.id}
             id={u.id}
           />
@@ -32,5 +33,10 @@ const UpgradeContainer = (props) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container:{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', alignItems: 'flex-start'},
+  contant:{ width: '50%' },
+})
 
 export default UpgradeContainer;

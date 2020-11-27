@@ -1,5 +1,11 @@
 import React, { useState, useContext, useCallback, useRef } from "react";
-import { View, StyleSheet, TouchableHighlight, PanResponder } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TouchableHighlight,
+  PanResponder,
+  Platform,
+} from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 
 import ResetBtn from "../Components/ResetBtn";
@@ -10,27 +16,19 @@ import UpgradeContainer from "../Components/UpgradeContainer";
 import DataManager from "../Context/DataManager";
 import Animated from "react-native-reanimated";
 
-const ClickerScreen = () => {
+import { AnimatedCircles } from "../Components/BouncingBall/AnimatedCircles.component";
 
+const ClickerScreen = () => {
   const [inputCoord, setInputCoord] = useState([]);
   const { clickAdd } = useContext(DataContext);
 
   const ClickAction = (evt) => {
-    clickAdd(evt.nativeEvent.locationX, evt.nativeEvent.locationY);
+    if (Platform.OS === "web") {
+      clickAdd(evt.pageX, evt.pageY - 100);
+    } else {
+      clickAdd(evt.nativeEvent.locationX, evt.nativeEvent.locationY);
+    }
   };
-
-  // const position = new Animated.ValueXY({x: 0, y: 0});
-  // const pan = useState(new Animated.ValueXY({x: 0, y: 0}));
-
-  // const panResponder = useState(
-  //   PanResponder.create({
-  //     onStartShouldSetPanResponder: () => true,
-  //     onPanResponderGrant: () => {
-  //       console.log("touch");
-  //     }
-
-  //   })
-  // )[0];
 
   return (
     <View style={styles.screen}>
@@ -42,12 +40,16 @@ const ClickerScreen = () => {
         onPress={(evt) => ClickAction(evt)}
       >
         <View style={styles.clickZone}>
+          <AnimatedCircles style={styles.balls} />
           <InputFeedbackContainer />
         </View>
       </TouchableHighlight>
       <View style={styles.upgradeZone}>
-          <UpgradeContainer upgradeType={"click"} />
-          <ResetBtn />
+        <UpgradeContainer
+          style={styles.upgradeContainer}
+          upgradeType={"click"}
+        />
+        <ResetBtn />
       </View>
     </View>
   );
@@ -65,12 +67,9 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
   },
-  upgradeZone: { flex: 5, flexDirection: "row", width: "100%" },
-  upgradeCol: {
-    width: "50%",
-    justifyContent: "space-around",
-  },
+  upgradeZone: { flex: 5, flexDirection: "column", width: "100%" },
   screen: { flex: 1, justifyContent: "center", alignItems: "center" },
+  balls: { zIndex: 0 },
 });
 
 export default ClickerScreen;

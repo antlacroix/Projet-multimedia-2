@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import {
   Text,
   View,
@@ -10,19 +10,19 @@ import {
   Alert,
 } from "react-native";
 
-
 import { DataContext } from "../Context/DataContext";
 
 const ResetBtn = () => {
-
   const { resetGame } = useContext(DataContext);
 
   return (
-    <TouchableHighlight onPress={() => resetGame() }>
-      <View style={styles.btn}>
-        <Text>RESET</Text>
-      </View>
-    </TouchableHighlight>
+    <View style={styles.btnContainer}>
+      <TouchableHighlight onPress={() => resetGame()}>
+        <View style={styles.btn}>
+          <Text>RESET</Text>
+        </View>
+      </TouchableHighlight>
+    </View>
   );
 };
 
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     backgroundColor: "lightblue",
     borderRadius: 25,
   },
+  btnContainer: { alignItems: "center", marginBottom: 20 },
 });
 
 export default ResetBtn;

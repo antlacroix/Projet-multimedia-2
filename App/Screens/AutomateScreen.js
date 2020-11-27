@@ -28,7 +28,7 @@ const AutomateScreen = () => {
 const styles = StyleSheet.create({
   banksContainer: { flex: 1, width: "100%" },
   screen: { flex: 1, width: "100%" },
-  upgradeZone: { flex: 15, flexDirection: "row", width: "100%" },
+  upgradeZone: { flex: 15, flexDirection: 'column', width: "100%"  },
   upgradeCol: { flex: 1, justifyContent: "space-around" },
 });
 
